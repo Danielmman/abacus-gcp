@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from "express";
 import { Storage } from "@google-cloud/storage";
 
@@ -6,7 +7,9 @@ const storage = new Storage({ keyFilename: "abacus-gcp.json" });
 const bucketName = "teachertrainingvidbucket";
 const port = 3000;
 
-app.post("/video-url", async (req, res) => {
+app.use(cors());
+
+app.get("/topic", async (req, res) => {
   try {
     const fileName = req.query.fileName;
     if (!fileName) {
